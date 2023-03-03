@@ -35,8 +35,8 @@ public class Main {
       System.out.println("Number of sheets : "+reader.getWorkbook().getNumberOfSheets());
       //Process
         Processor processor = new Processor();
-        processor.process(reader.getWorkbook());
-
+        processor.init(reader.getWorkbook());
+        processor.process();
 
     }
 
