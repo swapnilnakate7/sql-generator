@@ -1,6 +1,5 @@
 package cli;
 
-import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processors.Processor;
@@ -19,20 +18,21 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException {
+      BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
-      System.out.println("Choose your file extension");
-      System.out.println("1. xlsx \n2. xls");
-      int option =Integer.valueOf(bufferedReader.readLine());
-      System.out.println("Enter File Name");
+      LOGGER.info("Choose your file extension");
+      LOGGER.info("1. xlsx \n2. xls");
+      int option =Integer.parseInt(bufferedReader.readLine());
+      LOGGER.info("Enter File Name");
 
 
       //Get File Name
       String fileName = bufferedReader.readLine();
       reader = new Reader(fileName+fileExtensions.get(option));
-      System.out.println("Number of sheets : "+reader.getWorkbook().getNumberOfSheets());
+      if(LOGGER.isInfoEnabled()){
+          LOGGER.info(String.format("Number of sheets : %s",reader.getWorkbook().getNumberOfSheets()));
+      }
+
       //Process
         Processor processor = new Processor();
         processor.init(reader.getWorkbook());

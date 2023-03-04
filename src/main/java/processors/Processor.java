@@ -24,17 +24,18 @@ public class Processor {
         while(sheetIterator.hasNext()){
 
             Sheet currentSheet = sheetIterator.next();
-            SheetData sheetData = new SheetData();
+
 
             if(null != currentSheet) {
+                SheetData sheetData = new SheetData(currentSheet.getSheetName());
                 if(LOGGER.isDebugEnabled()){
                     LOGGER.debug(String.format("Sheet Name: %s", currentSheet.getSheetName()));
                 }
 
                 extractColumns(currentSheet.getRow(0), sheetData);
                 extractRows(currentSheet.rowIterator(), sheetData);
+                sheetDataList.add(sheetData);
             }
-            sheetDataList.add(sheetData);
 
         }
     }
