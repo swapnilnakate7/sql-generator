@@ -5,15 +5,18 @@ import beans.SheetData;
 
 import java.util.List;
 
-public class InsertScriptProcessor  extends SheetProcessor {
+public class DeleteScriptProcessor extends SheetProcessor{
 
-    public InsertScriptProcessor(List<SheetData> sheetData) {
+    public DeleteScriptProcessor(List<SheetData> sheetData) {
         super(sheetData);
     }
 
     @Override
-    public void process(){
+    public void process() {
         //TODO Read columns from Each sheetData and prepare the .sql file generation mechanism
+        /*
+         Use Column data to identify the row
+         */
     }
 
     /**
@@ -38,5 +41,4 @@ public class InsertScriptProcessor  extends SheetProcessor {
     protected String generateRows(SheetData sheetData) {
         return null;
     }
-
 }

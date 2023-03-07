@@ -2,20 +2,28 @@ package processors;
 
 import beans.RowData;
 import beans.SheetData;
-import org.apache.poi.ss.usermodel.*;
+import enums.Operation;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Processor {
 
-    Map<String,String> extractedData = new LinkedHashMap<>();
     List<SheetData> sheetDataList = new LinkedList<>();
+
+    private Operation selectedOperation;
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
 
     public void process(){
-        SheetProcessor sheetProcessor = new SheetProcessor(sheetDataList);
+        SheetProcessor sheetProcessor = new InsertScriptProcessor(sheetDataList);
         sheetProcessor.process();
     }
 
@@ -70,6 +78,10 @@ public class Processor {
            Cell currentCell = cellIterator.next();
            sheetData.addColumn(currentCell.getStringCellValue());
        }
+    }
+
+    public void setSelectedOperation(Operation operation){
+        this.selectedOperation = operation;
     }
 
 }
