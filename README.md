@@ -1,4 +1,4 @@
-# SQL Generator
+# SQL Generator [![Java CI with Maven](https://github.com/swapnilnakate7/sql-generator/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/swapnilnakate7/sql-generator/actions/workflows/maven.yml)
 This project helps to generate `.sql` files based on provided file.
 Currently supporting `.xlsx` file type.
 
