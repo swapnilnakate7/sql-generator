@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RowData implements Serializable {
-    private List<String> cellData;
+    private final List<String> cellData;
 
     public RowData(){
         cellData = new LinkedList<>();
@@ -17,11 +17,7 @@ public class RowData implements Serializable {
 
     public String printRow(){
         StringBuilder rowDetails = new StringBuilder(64);
-        this.cellData.forEach(cellValue->{
-            rowDetails
-                    .append(cellValue)
-                    .append(SheetData.COMMA);
-        });
+        this.cellData.forEach(cellValue-> rowDetails.append(cellValue).append(SheetData.COMMA));
         return rowDetails.toString();
     }
 }

@@ -5,14 +5,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SheetData implements Serializable {
-    List<String> columns;
-    List<RowData> rows;
+    private List<String> columns;
+    private List<RowData> rows;
+
+    private String sheetName;
 
     public static final String COMMA=",";
 
-    public SheetData(){
+    public SheetData(String sheetName){
         this.columns = new LinkedList<>();
         this.rows = new LinkedList<>();
+        this.sheetName = sheetName;
     }
 
     public void addColumn(String column){
@@ -25,21 +28,25 @@ public class SheetData implements Serializable {
 
     public String printColumns(){
         StringBuilder columnNames = new StringBuilder(64);
-        this.columns.forEach(columnName->{
+        this.columns.forEach(columnName->
             columnNames
                     .append(columnName)
-                    .append(COMMA);
-        });
+                    .append(COMMA)
+        );
         return columnNames.toString();
     }
 
     public String printRows(){
         StringBuilder rowDetails = new StringBuilder(64);
-        this.rows.forEach(rowData -> {
+        this.rows.forEach(rowData ->
             rowDetails.append(rowData.printRow())
-                    .append("\n");
-        });
+                    .append("\n")
+        );
         return rowDetails.toString();
+    }
+
+    public String getSheetName(){
+        return this.sheetName;
     }
 
 
