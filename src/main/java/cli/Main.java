@@ -17,7 +17,7 @@ import java.util.Map;
 public class Main {
     static Reader reader;
     static Map<Integer,String> fileExtensions = new LinkedHashMap<>();
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class.getName());
 
     public static void main(String[] args) throws IOException {
       BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));

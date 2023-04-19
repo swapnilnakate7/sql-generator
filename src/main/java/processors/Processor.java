@@ -20,7 +20,7 @@ public class Processor {
     List<SheetData> sheetDataList = new LinkedList<>();
 
     private Operation selectedOperation;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class.getName());
 
     public void process(){
         SheetProcessor sheetProcessor = new InsertScriptProcessor(sheetDataList);
