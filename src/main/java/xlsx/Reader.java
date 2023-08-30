@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Reader {
     private Workbook workbook;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Reader.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(Reader.class);
     public Reader(String fileName)  {
         try {
             File file = new File("src/main/resources/"+fileName);

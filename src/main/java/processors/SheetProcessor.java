@@ -15,7 +15,7 @@ public abstract class SheetProcessor implements Serializable {
     protected Writer writer;
 
     protected Operation selectedOperation;
-    private static final Logger LOGGER = LoggerFactory.getLogger(SheetProcessor.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(SheetProcessor.class);
 
     public SheetProcessor(List<SheetData> sheetData) {
         this.sheetData = sheetData;

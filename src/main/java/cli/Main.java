@@ -10,14 +10,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 
 public class Main {
     static Reader reader;
     static Map<Integer,String> fileExtensions = new LinkedHashMap<>();
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+
 
     public static void main(String[] args) throws IOException {
       BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -43,9 +43,9 @@ public class Main {
       int operationId = Integer.parseInt(bufferedReader.readLine());
       Operation selectedOperation = Operation.getOperation(operationId);
       reader = new Reader(fileName+fileExtensions.get(option));
-      if(LOGGER.isInfoEnabled()){
-          LOGGER.info(String.format("Number of sheets : %s",reader.getWorkbook().getNumberOfSheets()));
-      }
+
+      LOGGER.info(String.format("Number of sheets : %s",reader.getWorkbook().getNumberOfSheets()));
+
 
       //Process
         Processor processor = new Processor();
