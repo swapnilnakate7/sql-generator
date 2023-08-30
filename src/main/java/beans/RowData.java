@@ -16,8 +16,6 @@ public class RowData implements Serializable {
     }
 
     public String printRow(){
-        StringBuilder rowDetails = new StringBuilder(64);
-        this.cellData.forEach(cellValue-> rowDetails.append(cellValue).append(SheetData.COMMA));
-        return rowDetails.toString();
+        return String.join(SheetData.COMMA,this.cellData);
     }
 }

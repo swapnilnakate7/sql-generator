@@ -2,18 +2,26 @@ package processors;
 
 import beans.RowData;
 import beans.SheetData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class InsertScriptProcessor  extends SheetProcessor {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(InsertScriptProcessor.class);
+
     public InsertScriptProcessor(List<SheetData> sheetData) {
         super(sheetData);
     }
 
-    @Override
     public void process(){
         //TODO Read columns from Each sheetData and prepare the .sql file generation mechanism
+        this.sheetData.parallelStream().forEach(sheet -> {
+            LOGGER.info(sheet.printColumns());
+            LOGGER.info(sheet.printRows());
+            //Check for Insert Script
+        });
     }
 
     /**

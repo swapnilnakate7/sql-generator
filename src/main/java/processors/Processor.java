@@ -3,6 +3,7 @@ package processors;
 import beans.RowData;
 import beans.SheetData;
 import enums.Operation;
+import factories.SheetProcessorFactory;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,7 +24,9 @@ public class Processor {
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
 
     public void process(){
-        SheetProcessor sheetProcessor = new InsertScriptProcessor(sheetDataList);
+
+        SheetProcessor sheetProcessor = SheetProcessorFactory.getProcessor(selectedOperation,sheetDataList);
+
         sheetProcessor.process();
     }
 
@@ -36,8 +39,8 @@ public class Processor {
 
             if(null != currentSheet) {
                 SheetData sheetData = new SheetData(currentSheet.getSheetName());
-                if(LOGGER.isDebugEnabled()){
-                    LOGGER.debug(String.format("Sheet Name: %s", currentSheet.getSheetName()));
+                if(LOGGER.isInfoEnabled()){
+                    LOGGER.info(String.format("Sheet Name: %s", currentSheet.getSheetName()));
                 }
 
                 extractColumns(currentSheet.getRow(0), sheetData);

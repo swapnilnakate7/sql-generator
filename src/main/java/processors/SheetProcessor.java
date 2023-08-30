@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public abstract class SheetProcessor implements Serializable {
-    private final List<SheetData> sheetData;
+    protected final List<SheetData> sheetData;
     protected Writer writer;
 
     protected Operation selectedOperation;
@@ -22,13 +22,7 @@ public abstract class SheetProcessor implements Serializable {
         this.writer = new Writer();
     }
 
-    public void process() {
-        this.sheetData.parallelStream().forEach(sheet -> {
-            LOGGER.info(sheet.printColumns());
-            LOGGER.info(sheet.printRows());
-            //Check for Insert Script
-        });
-    }
+    public abstract void process();
 
 
     /**
