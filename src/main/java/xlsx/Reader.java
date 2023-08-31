@@ -14,7 +14,7 @@ public class Reader {
     private static final Logger LOGGER = LoggerFactory.getLogger(Reader.class);
     public Reader(String fileName)  {
         try {
-            File file = new File("src/main/resources/"+fileName);
+            File file = new File(fileName);
             this.workbook = new XSSFWorkbook(file);
         } catch (IOException | InvalidFormatException e) {
             LOGGER.error("Invalid File Path");

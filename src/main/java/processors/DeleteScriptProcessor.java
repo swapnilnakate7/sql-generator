@@ -20,14 +20,15 @@ public class DeleteScriptProcessor extends SheetProcessor{
     }
 
     /**
-     * Generator Row based on script type
+     * Generate row
      *
-     * @param columns     - List of columns extracted from file
-     * @param rowDataList - List of rowData for a particular sheet
-     * @return row string
+     * @param tableName -
+     * @param columns   -
+     * @param rowData   -
+     * @return printable row string
      */
     @Override
-    protected String generateRow(List<String> columns, List<RowData> rowDataList) {
+    protected String generateRow(String tableName, String columns, RowData rowData) {
         return null;
     }
 

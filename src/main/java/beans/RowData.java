@@ -1,23 +1,24 @@
 package beans;
 
+import org.apache.poi.ss.usermodel.CellValue;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 public class RowData implements Serializable {
-    private final List<String> cellData;
 
-    public RowData(){
-        cellData = new LinkedList<>();
+    private final List<CellData> cellDataList;
+
+    public RowData() {
+        cellDataList = new LinkedList<>();
     }
 
-    public void addCellValue(String cellValue){
-        cellData.add(cellValue);
+    public void addCellValue(CellValue cellValue) {
+        cellDataList.add(new CellData(cellValue));
     }
 
-    public String printRow(){
-        StringBuilder rowDetails = new StringBuilder(64);
-        this.cellData.forEach(cellValue-> rowDetails.append(cellValue).append(SheetData.COMMA));
-        return rowDetails.toString();
+    public String printRow() {
+        return String.join(SheetData.COMMA, this.cellDataList.stream().map(CellData::printCellData).toList());
     }
 }

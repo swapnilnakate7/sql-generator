@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public abstract class SheetProcessor implements Serializable {
-    private final List<SheetData> sheetData;
+    protected final List<SheetData> sheetData;
     protected Writer writer;
 
     protected Operation selectedOperation;
@@ -22,23 +22,17 @@ public abstract class SheetProcessor implements Serializable {
         this.writer = new Writer();
     }
 
-    public void process() {
-        this.sheetData.parallelStream().forEach(sheet -> {
-            LOGGER.info(sheet.printColumns());
-            LOGGER.info(sheet.printRows());
-            //Check for Insert Script
-        });
-    }
+    public abstract void process();
 
 
     /**
-     * Generator Row based on script type
-     *
-     * @param columns     - List of columns extracted from file
-     * @param rowDataList - List of rowData for a particular sheet
-     * @return row string
+     * Generate row
+     * @param tableName -
+     * @param columns -
+     * @param rowData -
+     * @return printable row string
      */
-    protected abstract String generateRow(List<String> columns, List<RowData> rowDataList);
+    protected abstract String generateRow(String tableName,String columns, RowData rowData);
 
     /**
      * Generates Multiple rows based on file type internally calls generateRow method

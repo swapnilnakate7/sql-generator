@@ -23,4 +23,11 @@ public class Writer {
             LOGGER.error(ioException.getMessage());
         }
     }
+    public void write(String tableName,String sheetData)  {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tableName + ".sql"))) {
+            bufferedWriter.write(sheetData);
+        }catch (IOException ioException){
+            LOGGER.error(ioException.getMessage());
+        }
+    }
 }
