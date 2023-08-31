@@ -3,8 +3,10 @@ package processors;
 import beans.RowData;
 import beans.SheetData;
 import enums.Operation;
+import factories.SheetProcessorFactory;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -20,24 +22,28 @@ public class Processor {
     List<SheetData> sheetDataList = new LinkedList<>();
 
     private Operation selectedOperation;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
 
-    public void process(){
-        SheetProcessor sheetProcessor = new InsertScriptProcessor(sheetDataList);
-        sheetProcessor.process();
+    public void process() {
+
+        SheetProcessor sheetProcessor = SheetProcessorFactory.getProcessor(selectedOperation, sheetDataList);
+        if(null != sheetProcessor){
+            sheetProcessor.process();
+        }
+
     }
 
-    public void init(Workbook workbook){
+    public void init(Workbook workbook) {
         Iterator<Sheet> sheetIterator = workbook.sheetIterator();
-        while(sheetIterator.hasNext()){
+        while (sheetIterator.hasNext()) {
 
             Sheet currentSheet = sheetIterator.next();
 
 
-            if(null != currentSheet) {
+            if (null != currentSheet) {
                 SheetData sheetData = new SheetData(currentSheet.getSheetName());
-                if(LOGGER.isDebugEnabled()){
-                    LOGGER.debug(String.format("Sheet Name: %s", currentSheet.getSheetName()));
+                if (LOGGER.isInfoEnabled()) {
+                    LOGGER.info(String.format("Sheet Name: %s", currentSheet.getSheetName()));
                 }
 
                 extractColumns(currentSheet.getRow(0), sheetData);
@@ -48,39 +54,44 @@ public class Processor {
         }
     }
 
-    private void extractRows(Iterator<Row> rowIterator, SheetData sheetData){
-        while (rowIterator.hasNext()){
-           Row row= rowIterator.next();
-           if(row.getRowNum() != 0){
-               sheetData.addRow(getRowData(row.cellIterator()));
-           }
+    private void extractRows(Iterator<Row> rowIterator, SheetData sheetData) {
+        while (rowIterator.hasNext()) {
+            Row row = rowIterator.next();
+            if (row.getRowNum() != 0) {
+                sheetData.addRow(getRowData(row.cellIterator()));
+            }
         }
     }
 
-    private RowData getRowData(Iterator<Cell> cellIterator){
-        RowData rowData= new RowData();
-        while (cellIterator.hasNext()){
+    private RowData getRowData(Iterator<Cell> cellIterator) {
+        RowData rowData = new RowData();
+        while (cellIterator.hasNext()) {
             rowData.addCellValue(getCellValue(cellIterator.next()));
         }
         return rowData;
     }
 
-    private String getCellValue(Cell cell){
-        if(cell.getCellType() == CellType.NUMERIC){
-            return Integer.toString((int)cell.getNumericCellValue());
+    private CellValue getCellValue(Cell cell) {
+        CellValue cellValue;
+
+        if (cell.getCellType() == CellType.NUMERIC) {
+            cellValue = new CellValue(cell.getNumericCellValue());
+        } else {
+            cellValue = new CellValue(cell.getStringCellValue());
         }
-        return cell.getStringCellValue();
+
+        return cellValue;
     }
 
-    private void extractColumns(Row row, SheetData sheetData){
-       Iterator<Cell> cellIterator = row.cellIterator();
-       while(cellIterator.hasNext()){
-           Cell currentCell = cellIterator.next();
-           sheetData.addColumn(currentCell.getStringCellValue());
-       }
+    private void extractColumns(Row row, SheetData sheetData) {
+        Iterator<Cell> cellIterator = row.cellIterator();
+        while (cellIterator.hasNext()) {
+            Cell currentCell = cellIterator.next();
+            sheetData.addColumn(currentCell.getStringCellValue());
+        }
     }
 
-    public void setSelectedOperation(Operation operation){
+    public void setSelectedOperation(Operation operation) {
         this.selectedOperation = operation;
     }
 

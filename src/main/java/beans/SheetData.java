@@ -1,8 +1,11 @@
 package beans;
 
+import org.apache.commons.math3.ode.ContinuousOutputModel;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SheetData implements Serializable {
     private List<String> columns;
@@ -27,27 +30,19 @@ public class SheetData implements Serializable {
     }
 
     public String printColumns(){
-        StringBuilder columnNames = new StringBuilder(64);
-        this.columns.forEach(columnName->
-            columnNames
-                    .append(columnName)
-                    .append(COMMA)
-        );
-        return columnNames.toString();
+        return String.join(COMMA,this.columns);
     }
 
     public String printRows(){
-        StringBuilder rowDetails = new StringBuilder(64);
-        this.rows.forEach(rowData ->
-            rowDetails.append(rowData.printRow())
-                    .append("\n")
-        );
-        return rowDetails.toString();
+        List<String> rowNames=this.rows.stream().map(RowData::printRow).toList();
+        return String.join("|",rowNames);
     }
 
     public String getSheetName(){
         return this.sheetName;
     }
 
-
+    public List<RowData> getRows() {
+        return rows;
+    }
 }
