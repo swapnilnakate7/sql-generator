@@ -42,5 +42,7 @@ public class SheetData implements Serializable {
         return this.sheetName;
     }
 
-
+    public List<RowData> getRows() {
+        return rows;
+    }
 }

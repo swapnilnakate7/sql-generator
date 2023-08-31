@@ -26,13 +26,13 @@ public abstract class SheetProcessor implements Serializable {
 
 
     /**
-     * Generator Row based on script type
-     *
-     * @param columns     - List of columns extracted from file
-     * @param rowDataList - List of rowData for a particular sheet
-     * @return row string
+     * Generate row
+     * @param tableName -
+     * @param columns -
+     * @param rowData -
+     * @return printable row string
      */
-    protected abstract String generateRow(List<String> columns, List<RowData> rowDataList);
+    protected abstract String generateRow(String tableName,String columns, RowData rowData);
 
     /**
      * Generates Multiple rows based on file type internally calls generateRow method
