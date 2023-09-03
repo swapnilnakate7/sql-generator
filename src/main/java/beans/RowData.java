@@ -21,4 +21,8 @@ public class RowData implements Serializable {
     public String printRow() {
         return String.join(SheetData.COMMA, this.cellDataList.stream().map(CellData::printCellData).toList());
     }
+
+    public List<CellData> getCellDataList() {
+        return cellDataList;
+    }
 }

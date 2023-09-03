@@ -1,11 +1,8 @@
 package beans;
 
-import org.apache.commons.math3.ode.ContinuousOutputModel;
-
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SheetData implements Serializable {
     private List<String> columns;
@@ -44,5 +41,9 @@ public class SheetData implements Serializable {
 
     public List<RowData> getRows() {
         return rows;
+    }
+
+    public List<String> getColumns() {
+        return columns;
     }
 }

@@ -42,7 +42,7 @@ public class Main {
               """);
       int operationId = Integer.parseInt(bufferedReader.readLine());
       Operation selectedOperation = Operation.getOperation(operationId);
-      reader = new Reader(fileName+fileExtensions.get(option));
+      reader = new Reader(fileName.split("\\.")[0]+fileExtensions.get(option));
 
       LOGGER.info(String.format("Number of sheets : %s",reader.getWorkbook().getNumberOfSheets()));
 
