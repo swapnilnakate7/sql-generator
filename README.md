@@ -5,7 +5,14 @@ Currently supporting `.xlsx` file type.
 
 ## Instructions
     First row of the file will be read as columns and 
-    second row onwards will be picked up as row's 
+    second row onwards will be picked up as data for the row
+### For Insert Script Generation
+First Row of the xlsx file is considered as `COLUMNS` and second row
+onwards is considered as `row` data to be inserted in table
+
+### For Update Script Generation _(03/09/2023)_
+First column is considered as `primary key` to be updated in the database
+and rest of the columns are considered as data for which is to be updated
 
 ## Help
 #### Twitter `@SwapnilNakate7`
