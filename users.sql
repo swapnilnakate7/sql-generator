@@ -1,5 +1,5 @@
-UPDATE users SET NAME = 'Adam' ,  = 'Obams' WHERE ID = 1
-UPDATE users SET NAME = 'Eve' ,  = 'Obama' WHERE ID = 2
-UPDATE users SET NAME = 'John' ,  = 'Doe' WHERE ID = 3
-UPDATE users SET NAME = 'Test' ,  = 'Clinton' WHERE ID = 4
-UPDATE users SET NAME = 'One' ,  = 'Baxtor' WHERE ID = 5
+DELETE FROM users WHERE NAME = 'Adam' AND  = 'Obams';
+DELETE FROM users WHERE NAME = 'Eve' AND  = 'Obama';
+DELETE FROM users WHERE NAME = 'John' AND  = 'Doe';
+DELETE FROM users WHERE NAME = 'Test' AND  = 'Clinton';
+DELETE FROM users WHERE NAME = 'One' AND  = 'Baxtor';
