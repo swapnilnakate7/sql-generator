@@ -14,6 +14,10 @@ onwards is considered as `row` data to be inserted in table
 First column is considered as `primary key` to be updated in the database
 and rest of the columns are considered as data for which is to be updated
 
+### For Delete Script Generation _(03/09/2023)_
+Generator will generate Delete script with by considering the given 
+columns as identifiers for the row. At present all the columns are considered.
+
 ## Help
-#### Twitter `@SwapnilNakate7`
+#### Twitter / X `@SwapnilNakate7`
 #### Email   `nakate.swapnil7@gmail.com`

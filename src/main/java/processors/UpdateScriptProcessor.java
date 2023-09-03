@@ -57,9 +57,10 @@ public class UpdateScriptProcessor extends SheetProcessor{
         while (columnIterator.hasNext()){
            String column= columnIterator.next();
            if(idx==1){
-               script.append(" SET ").append(column);
+               script.append(" SET ");
            }
-            script.append(" = ").append(cellDataList.get(idx).printCellData());
+
+            script.append(column).append(" = ").append(cellDataList.get(idx).printCellData());
 
             if(columnIterator.hasNext()){
                 script.append(" , ");
@@ -69,6 +70,7 @@ public class UpdateScriptProcessor extends SheetProcessor{
 
                 script.append(" WHERE ").append(columnList.get(0))
                 .append(" = ").append(cellDataList.get(0).printCellData());
+        script.append(";");
         return script.toString();    }
 
     /**
